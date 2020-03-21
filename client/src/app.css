@@ -1,0 +1,70 @@
+.app {
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.flavorOfTheDay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 90vw;
+
+  border: #e3e3e3 1px solid;
+  border-radius: 4px;
+  padding: 7px;
+}
+
+.flavorOfTheDay:last-of-type {
+  margin-bottom: 60px;
+}
+
+.current {
+  background-color: #a3e5ff;
+}
+
+.date {
+  font-family: 'Arvo', sans-serif;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #036;
+  margin-right: 7px;
+}
+.flavor {
+  font-size: 24px;
+}
+
+.filters {
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  align-items: center;
+  flex-direction: row;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  justify-content: center;
+}
+
+.filter {
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 6px;
+  margin-right: 6px;
+  border: #e3e3e3 1px solid;
+  border-radius: 4px;
+  padding: 7px;
+}
+
+.filter.active {
+  color: white;
+  background-color: #036;
+}
+
+
