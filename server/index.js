@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const sqlite = require('sqlite');
 
 const app = express();
-const port = 5001;
+const port = 3002;
 
 (async () => {
   const db = await sqlite.open(__dirname + '/../db.sqlite', { Promise, verbose: true });
