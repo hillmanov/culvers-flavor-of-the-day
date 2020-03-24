@@ -1,5 +1,5 @@
 import React from 'react';
-import { map, filter } from 'lodash';
+import { map, filter, startCase } from 'lodash';
 import './app.css';
 import { observer } from 'mobx-react';
 import { types, flow } from 'mobx-state-tree';
@@ -86,9 +86,13 @@ const AppController = model('AppController', {
       const current = date === self.currentDate;
       return (
         <div className={classNames('flavorOfTheDay', { current })}  key={date}>
-          <div className="date">{dayjs(date).format('MMMM Do')} {current ? '(Today)' : ''}</div>
-          <div className="flavor">{flavor}</div>
-          <img className="image" alt={flavor} src={image} />
+          <div>
+            <div className="date">{dayjs(date).format('MMMM Do')} {current ? '(Today)' : ''}</div>
+            <div className="flavor">{flavor}</div>
+          </div>
+          <div>
+            <img className="image" alt={flavor} src={image} />
+          </div>
         </div>
       )
     });
@@ -100,6 +104,15 @@ const AppController = model('AppController', {
   },
 }));
 
+const FilterButton = ({ filter, setFilter, activeFilter }) => (
+  <div 
+    className={classNames('filter', { active: filter === activeFilter})} 
+    onClick={() => setFilter(filter)}
+    >
+    {startCase(filter)}
+  </div>
+);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -110,11 +123,11 @@ class App extends React.Component {
     return (
       <div className={'app'}>
         <div className="filters">
-          <div className={classNames('filter', { active: this.c.filter === 'all'})} onClick={() => this.c.setFilter('all')}>All</div>
-          <div className={classNames('filter', { active: this.c.filter === 'thisMonth'})} onClick={() => this.c.setFilter('thisMonth')}>This Month</div>
-          <div className={classNames('filter', { active: this.c.filter === 'restOfThisMonth'})} onClick={() => this.c.setFilter('restOfThisMonth')}>Rest of Month</div>
-          <div className={classNames('filter', { active: this.c.filter === 'nextMonth'})} onClick={() => this.c.setFilter('nextMonth')}>Next Month</div>
-          <div className={classNames('filter', { active: this.c.filter === 'today'})} onClick={() => this.c.setFilter('today')}>Today</div>
+          <FilterButton filter="all"             setFilter={this.c.setFilter} activeFilter={this.c.filter} />
+          <FilterButton filter="thisMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
+          <FilterButton filter="restOfThisMonth" setFilter={this.c.setFilter} activeFilter={this.c.filter} />
+          <FilterButton filter="nextMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
+          <FilterButton filter="today"           setFilter={this.c.setFilter} activeFilter={this.c.filter} />
         </div>
         {this.c.content}
       </div>
