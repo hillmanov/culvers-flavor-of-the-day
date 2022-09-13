@@ -1,9 +1,9 @@
 const { trim, each } = require('lodash');
 const axios = require('axios');
-const Promise = require('bluebird');
 const cheerio = require('cheerio');
 const moment = require('moment');
 const sqlite = require('sqlite');
+const sqlite3 = require('sqlite3');
 
 (async () => {
   // Scrape
@@ -18,7 +18,11 @@ const sqlite = require('sqlite');
   });
 
   // Insert into DB
-  const db = await sqlite.open(__dirname + '/db.sqlite', { Promise, verbose: true });
+  const db = await sqlite.open({
+	  filename: __dirname + '/db.sqlite', 
+	  driver: sqlite3.Database,
+  }
+  );
   await db.exec(`CREATE TABLE IF NOT EXISTS flavor_of_the_day (
     date DATE,
     flavor TEXT,
