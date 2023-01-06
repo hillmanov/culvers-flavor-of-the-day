@@ -19,7 +19,7 @@ const sqlite3 = require('sqlite3');
 
   // Insert into DB
   const db = await sqlite.open({
-	  filename: __dirname + '/scraper/db.sqlite', 
+	  filename: __dirname + '/server/db.sqlite', 
 	  driver: sqlite3.Database,
   }
   );

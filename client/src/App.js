@@ -51,8 +51,6 @@ const AppController = model('AppController', {
 .views(self => ({
   get filterdFlavorsOfThDay() {
     switch (self.filter) {
-      case 'all':
-        return self.flavorsOfTheDay;
       case 'thisMonth':
         return filter(self.flavorsOfTheDay, ({ date }) => {
           return dayjs(date).isBefore(dayjs().endOf('month'));
@@ -60,14 +58,6 @@ const AppController = model('AppController', {
       case 'restOfThisMonth':
         return filter(self.flavorsOfTheDay, ({ date }) => {
           return (dayjs(date).isSame(dayjs(self.currentDate)) || dayjs(date).isAfter(dayjs(self.currentDate))) && dayjs(date).isBefore(dayjs().endOf('month'));
-        });
-      case 'today':
-        return filter(self.flavorsOfTheDay, ({ date }) => {
-          return dayjs(date).isSame(dayjs(self.currentDate));
-        });
-      case 'nextMonth':
-        return filter(self.flavorsOfTheDay, ({ date }) => {
-          return dayjs(date).isAfter(dayjs().endOf('month'))
         });
       default: 
         return null;
@@ -123,11 +113,8 @@ class App extends React.Component {
     return (
       <div className={'app'}>
         <div className="filters">
-          <FilterButton filter="all"             setFilter={this.c.setFilter} activeFilter={this.c.filter} />
-          <FilterButton filter="thisMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
           <FilterButton filter="restOfThisMonth" setFilter={this.c.setFilter} activeFilter={this.c.filter} />
-          <FilterButton filter="nextMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
-          <FilterButton filter="today"           setFilter={this.c.setFilter} activeFilter={this.c.filter} />
+          <FilterButton filter="thisMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
         </div>
         {this.c.content}
       </div>
