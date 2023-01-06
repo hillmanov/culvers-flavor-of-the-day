@@ -9,12 +9,15 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import classNames from 'classnames';
 dayjs.extend(advancedFormat)
 
+window.dayjs = dayjs;
+
 const {
   model,
   optional,
   array,
   enumeration,
   string,
+  Date: mstDate,
 } = types;
 
 const FlavorOfTheDay = model('FlavorOfTheDay', {
@@ -59,6 +62,7 @@ const AppController = model('AppController', {
         });
       case 'restOfThisMonth':
         return filter(self.flavorsOfTheDay, ({ date }) => {
+          console.log(`date`, date);
           return (dayjs(date).isSame(dayjs(self.currentDate)) || dayjs(date).isAfter(dayjs(self.currentDate))) && dayjs(date).isBefore(dayjs().endOf('month'));
         });
       case 'today':
@@ -123,11 +127,8 @@ class App extends React.Component {
     return (
       <div className={'app'}>
         <div className="filters">
-          <FilterButton filter="all"             setFilter={this.c.setFilter} activeFilter={this.c.filter} />
           <FilterButton filter="thisMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
           <FilterButton filter="restOfThisMonth" setFilter={this.c.setFilter} activeFilter={this.c.filter} />
-          <FilterButton filter="nextMonth"       setFilter={this.c.setFilter} activeFilter={this.c.filter} />
-          <FilterButton filter="today"           setFilter={this.c.setFilter} activeFilter={this.c.filter} />
         </div>
         {this.c.content}
       </div>

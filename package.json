@@ -1,0 +1,28 @@
+{
+  "name": "culvers-flavor-of-the-day",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scraper.js",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "cheerio": "^1.0.0-rc.12",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hillmanov/culvers-flavor-of-the-day.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hillmanov/culvers-flavor-of-the-day/issues"
+  },
+  "homepage": "https://github.com/hillmanov/culvers-flavor-of-the-day#readme"
+}
